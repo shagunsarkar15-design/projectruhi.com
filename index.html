@@ -3,30 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>रूhī — Giving every child a chance to dream</title>
 
 <style>
-
 /* =========================================================
-   RUHĪ — HOME PAGE
-   Flat colours • Thick borders • Indian-inspired pattern
+   RUHĪ — SKY & PAPER COMIC THEME
+   Soft Sky Gradient • Scattered Clouds • Paper Bubble Cards
    ========================================================= */
 
 :root {
-    --cream: #f8efd9;
-    --paper: #fff8e8;
-    --orange: #e9693f;
-    --raspberry: #c93667;
-    --mustard: #e5b83c;
-    --lime: #b7c94a;
-    --olive: #687449;
-    --blue: #8fb8c7;
-    --brown: #342b25;
-    --white: #fffaf0;
+    --sky-top: #a1c4fd;
+    --sky-bottom: #c2e9fb;
+    --cloud-white: #ffffff;
+    --paper-bg: #fbf9f4;
+    --paper-border: #2b2b2b;
+    --text-dark: #23201e;
+    --accent-orange: #e9693f;
+    --accent-raspberry: #c93667;
+    --accent-mustard: #e5b83c;
+    --accent-blue: #5b9ed6;
+    --accent-lime: #8cb83e;
 }
-
-/* ---------- BASIC ---------- */
 
 * {
     box-sizing: border-box;
@@ -39,10 +36,11 @@ html {
 }
 
 body {
-    background: var(--cream);
-    color: var(--brown);
-    font-family: Arial, Helvetica, sans-serif;
-    line-height: 1.5;
+    background: linear-gradient(180deg, #b0d4f6 0%, #e8f4fc 50%, #f7fbfe 100%);
+    color: var(--text-dark);
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
 }
 
 h1, h2, h3 {
@@ -55,651 +53,307 @@ a {
     text-decoration: none;
 }
 
-/* ---------- REPEATING ETHNIC-INSPIRED PATTERN ---------- */
-
-.pattern {
-    height: 34px;
-    border-top: 4px solid var(--brown);
-    border-bottom: 4px solid var(--brown);
-
-    background-color: var(--mustard);
-
-    background-image:
-        linear-gradient(45deg, transparent 42%, var(--brown) 43%, var(--brown) 57%, transparent 58%),
-        linear-gradient(-45deg, transparent 42%, var(--brown) 43%, var(--brown) 57%, transparent 58%);
-
-    background-size: 22px 22px;
-}
-
 /* ---------- NAVBAR ---------- */
 
 nav {
     position: sticky;
     top: 0;
     z-index: 1000;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     padding: 18px 5%;
-
-    background: var(--cream);
-
-    border-bottom: 4px solid var(--brown);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid rgba(43, 43, 43, 0.15);
 }
 
 .logo {
     font-family: Georgia, serif;
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: bold;
-}
-
-.logo-small {
-    font-family: Georgia, serif;
+    color: var(--text-dark);
 }
 
 .nav-links {
     display: flex;
-    gap: 28px;
-    font-size: 0.9rem;
-    font-weight: bold;
+    gap: 30px;
+    font-size: 0.95rem;
+    font-weight: 600;
 }
 
 .nav-links a {
     position: relative;
+    transition: color 0.2s ease;
 }
 
 .nav-links a:hover {
-    color: var(--raspberry);
+    color: var(--accent-raspberry);
 }
 
-.nav-links a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -5px;
-    width: 0;
-    height: 3px;
-    background: var(--raspberry);
-    transition: 0.2s;
-}
+/* ---------- FLOATING BACKGROUND CLOUDS ---------- */
 
-.nav-links a:hover::after {
+.sky-container {
+    position: relative;
     width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
 }
 
-/* ---------- HERO ---------- */
+.cloud {
+    position: absolute;
+    background: #ffffff;
+    border-radius: 100px;
+    opacity: 0.85;
+    box-shadow: 0 8px 24px rgba(149, 184, 219, 0.25);
+    pointer-events: none;
+}
+
+.cloud::before, .cloud::after {
+    content: '';
+    position: absolute;
+    background: #ffffff;
+    border-radius: 50%;
+}
+
+.cloud-1 {
+    width: 180px;
+    height: 60px;
+    top: 10%;
+    left: 5%;
+}
+.cloud-1::before { width: 80px; height: 80px; top: -35px; left: 25px; }
+.cloud-1::after { width: 60px; height: 60px; top: -20px; right: 25px; }
+
+.cloud-2 {
+    width: 240px;
+    height: 75px;
+    top: 18%;
+    right: 8%;
+}
+.cloud-2::before { width: 100px; height: 100px; top: -45px; left: 35px; }
+.cloud-2::after { width: 80px; height: 80px; top: -25px; right: 35px; }
+
+.cloud-3 {
+    width: 150px;
+    height: 50px;
+    top: 60%;
+    left: 45%;
+    opacity: 0.6;
+}
+.cloud-3::before { width: 65px; height: 65px; top: -25px; left: 20px; }
+.cloud-3::after { width: 50px; height: 50px; top: -15px; right: 20px; }
+
+/* ---------- HERO SECTION ---------- */
 
 .hero {
-    min-height: 760px;
-    padding: 70px 7%;
-
+    position: relative;
+    z-index: 10;
+    min-height: calc(100vh - 80px);
+    padding: 60px 7%;
     display: grid;
     grid-template-columns: 1.05fr 0.95fr;
-    gap: 60px;
+    gap: 50px;
     align-items: center;
-
-    background: var(--cream);
-
-    border-bottom: 4px solid var(--brown);
-}
-
-.hero-copy {
-    position: relative;
 }
 
 .eyebrow {
     display: inline-block;
-
-    padding: 8px 14px;
-
-    background: var(--raspberry);
-    color: var(--white);
-
-    border: 3px solid var(--brown);
-    border-radius: 4px;
-
-    font-size: 0.78rem;
-    font-weight: bold;
+    padding: 8px 16px;
+    background: var(--accent-raspberry);
+    color: #ffffff;
+    border: 2px solid var(--paper-border);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
     letter-spacing: 1px;
-
     transform: rotate(-2deg);
+    box-shadow: 2px 2px 0 var(--paper-border);
 }
 
 .hero h1 {
-    margin-top: 28px;
-
-    font-size: clamp(4rem, 8vw, 7.5rem);
-    line-height: 0.88;
-    letter-spacing: -5px;
+    margin-top: 24px;
+    font-size: clamp(3.8rem, 7.5vw, 6.8rem);
+    line-height: 0.92;
+    letter-spacing: -3px;
+    color: var(--text-dark);
 }
 
 .hero h1 span {
-    color: var(--orange);
+    color: var(--accent-orange);
 }
 
 .hero-description {
-    max-width: 540px;
-    margin-top: 30px;
-
-    font-size: 1.15rem;
+    max-width: 500px;
+    margin-top: 25px;
+    font-size: 1.2rem;
     line-height: 1.7;
+    color: #3d3935;
 }
 
 .hero-buttons {
     display: flex;
-    gap: 15px;
+    gap: 18px;
     margin-top: 35px;
 }
 
 .button {
     display: inline-block;
-
-    padding: 14px 24px;
-
-    border: 4px solid var(--brown);
-    border-radius: 5px;
-
+    padding: 14px 28px;
+    border: 3px solid var(--paper-border);
+    border-radius: 30px;
     font-weight: bold;
-
-    box-shadow: 5px 5px 0 var(--brown);
-
-    transition: 0.15s;
+    font-size: 1rem;
+    box-shadow: 4px 4px 0 var(--paper-border);
+    transition: all 0.2s ease;
 }
 
 .button:hover {
-    transform: translate(3px, 3px);
-    box-shadow: 2px 2px 0 var(--brown);
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--paper-border);
 }
 
 .button-primary {
-    background: var(--orange);
+    background: var(--accent-orange);
+    color: #fff;
 }
 
 .button-secondary {
-    background: var(--mustard);
+    background: #ffffff;
+    color: var(--text-dark);
 }
 
-/* ---------- HERO ART ---------- */
+/* ---------- HERO ART: COMIC PAPER SPEECH BUBBLES ---------- */
 
 .hero-art {
     position: relative;
     min-height: 520px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    justify-content: center;
+    align-items: center;
 }
 
-.paper {
+.comic-bubble {
+    position: relative;
+    background: var(--paper-bg);
+    border: 3px solid var(--paper-border);
+    border-radius: 50px / 40px; /* Gives the classic oval comic shape */
+    padding: 28px 38px;
+    width: 320px;
+    box-shadow: 6px 6px 0px rgba(43, 43, 43, 0.85);
+    transition: transform 0.3s ease;
+}
+
+.comic-bubble:hover {
+    transform: scale(1.03) rotate(0deg) !important;
+}
+
+/* Speech Bubble Tail */
+.comic-bubble::after {
+    content: '';
     position: absolute;
-
-    width: 330px;
-    min-height: 260px;
-
-    padding: 35px;
-
-    border: 4px solid var(--brown);
-    border-radius: 8px;
-
-    box-shadow: 9px 9px 0 var(--brown);
+    bottom: -15px;
+    left: 40px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 18px 15px 0 5px;
+    border-color: var(--paper-bg) transparent transparent transparent;
+    z-index: 2;
 }
 
-.paper-one {
-    top: 50px;
-    left: 25px;
-
-    background: var(--mustard);
-
-    transform: rotate(-6deg);
-}
-
-.paper-two {
-    top: 145px;
-    right: 10px;
-
-    background: var(--raspberry);
-    color: var(--white);
-
-    transform: rotate(5deg);
-}
-
-.paper-three {
-    bottom: 20px;
-    left: 80px;
-
-    background: var(--lime);
-
-    transform: rotate(-2deg);
-}
-
-.paper h3 {
-    font-size: 2.5rem;
-    line-height: 1;
-}
-
-.paper p {
-    margin-top: 15px;
-    font-size: 1rem;
-}
-
-.doodle {
+.comic-bubble::before {
+    content: '';
     position: absolute;
-    font-size: 3rem;
+    bottom: -19px;
+    left: 38px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 20px 17px 0 4px;
+    border-color: var(--paper-border) transparent transparent transparent;
+    z-index: 1;
 }
 
-.star {
-    top: 10px;
-    right: 50px;
+.bubble-one {
+    transform: rotate(-3deg) translateX(-20px);
 }
 
-.flower {
-    bottom: 40px;
-    right: 20px;
+.bubble-two {
+    transform: rotate(3deg) translateX(25px);
 }
 
-.arrow {
-    top: 260px;
-    left: 0;
-    font-size: 4rem;
-    transform: rotate(-15deg);
+.bubble-three {
+    transform: rotate(-2deg) translateX(-10px);
 }
 
-/* ---------- INTRO ---------- */
+.comic-bubble h3 {
+    font-size: 2rem;
+    color: var(--text-dark);
+    margin-bottom: 6px;
+}
 
-.intro {
-    padding: 80px 7%;
-    background: var(--paper);
+.bubble-one h3 { color: var(--accent-raspberry); }
+.bubble-two h3 { color: var(--accent-blue); }
+.bubble-three h3 { color: var(--accent-orange); }
 
-    border-bottom: 4px solid var(--brown);
+.comic-bubble p {
+    font-size: 0.98rem;
+    color: #4a4540;
+    line-height: 1.4;
+}
+
+/* ---------- CONTENT SECTIONS (CLEAN & MODERN) ---------- */
+
+section.content-section {
+    position: relative;
+    z-index: 10;
+    max-width: 1100px;
+    margin: 60px auto;
+    padding: 60px 40px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 3px solid var(--paper-border);
+    border-radius: 24px;
+    box-shadow: 8px 8px 0px rgba(43, 43, 43, 0.15);
+}
+
+.section-label {
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: var(--accent-raspberry);
+    margin-bottom: 12px;
 }
 
 .intro-grid {
     display: grid;
-    grid-template-columns: 0.7fr 1.3fr;
-    gap: 60px;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 40px;
     align-items: center;
-}
-
-.section-label {
-    font-weight: bold;
-    letter-spacing: 2px;
-    font-size: 0.8rem;
-    text-transform: uppercase;
 }
 
 .intro h2 {
-    margin-top: 15px;
-    font-size: clamp(2.8rem, 5vw, 5rem);
-    line-height: 0.95;
-}
-
-.intro-text {
-    font-size: 1.2rem;
-    line-height: 1.8;
-}
-
-.highlight {
-    display: inline;
-    background: var(--mustard);
-    padding: 2px 7px;
-    border: 2px solid var(--brown);
-}
-
-/* ---------- WORLD ---------- */
-
-.world {
-    padding: 90px 7%;
-    background: var(--orange);
-
-    border-bottom: 4px solid var(--brown);
-}
-
-.world-header {
-    max-width: 700px;
-}
-
-.world-header h2 {
-    margin-top: 15px;
-    font-size: clamp(3rem, 6vw, 6rem);
-    line-height: 0.9;
-}
-
-.world-header p {
-    margin-top: 22px;
-    max-width: 600px;
-    font-size: 1.1rem;
-}
-
-.map-area {
-    position: relative;
-
-    max-width: 1050px;
-    margin: 70px auto 0;
-
-    min-height: 620px;
-
-    background: var(--paper);
-
-    border: 5px solid var(--brown);
-    border-radius: 10px;
-
-    overflow: hidden;
-}
-
-.map-title {
-    position: absolute;
-    top: 25px;
-    left: 30px;
-
-    background: var(--lime);
-
-    padding: 10px 15px;
-
-    border: 3px solid var(--brown);
-    border-radius: 4px;
-
-    font-weight: bold;
-}
-
-.india-map {
-    position: absolute;
-
-    left: 50%;
-    top: 50%;
-
-    transform: translate(-50%, -45%);
-
-    width: 330px;
-    height: 500px;
-}
-
-.india-map path {
-    fill: var(--lime);
-    stroke: var(--brown);
-    stroke-width: 5;
-    stroke-linejoin: round;
-}
-
-/* ---------- MAP MARKERS ---------- */
-
-.marker {
-    position: absolute;
-
-    padding: 10px 14px;
-
-    background: var(--white);
-
-    border: 3px solid var(--brown);
-    border-radius: 5px;
-
-    font-size: 0.85rem;
-    font-weight: bold;
-
-    box-shadow: 4px 4px 0 var(--brown);
-
-    z-index: 5;
-}
-
-.marker::before {
-    content: "📍";
-}
-
-.marker-1 {
-    top: 130px;
-    left: 12%;
-}
-
-.marker-2 {
-    top: 205px;
-    right: 9%;
-}
-
-.marker-3 {
-    top: 330px;
-    left: 7%;
-}
-
-.marker-4 {
-    bottom: 75px;
-    right: 10%;
-}
-
-.marker-5 {
-    bottom: 40px;
-    left: 30%;
-}
-
-.map-note {
-    position: absolute;
-    bottom: 18px;
-    left: 30px;
-
-    font-size: 0.75rem;
-    max-width: 300px;
-}
-
-/* ---------- APPROACH ---------- */
-
-.approach {
-    padding: 90px 7%;
-    background: var(--raspberry);
-    color: var(--white);
-
-    border-bottom: 4px solid var(--brown);
-}
-
-.approach h2 {
-    margin-top: 15px;
-    font-size: clamp(3rem, 6vw, 5.5rem);
-    line-height: 0.9;
-}
-
-.approach-grid {
-    margin-top: 55px;
-
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-}
-
-.approach-card {
-    min-height: 270px;
-
-    padding: 30px;
-
-    color: var(--brown);
-
-    border: 4px solid var(--brown);
-    border-radius: 7px;
-
-    box-shadow: 7px 7px 0 var(--brown);
-}
-
-.approach-card:nth-child(1) {
-    background: var(--mustard);
-}
-
-.approach-card:nth-child(2) {
-    background: var(--lime);
-}
-
-.approach-card:nth-child(3) {
-    background: var(--blue);
-}
-
-.icon {
     font-size: 2.8rem;
+    line-height: 1.1;
 }
 
-.approach-card h3 {
-    margin-top: 20px;
-    font-size: 2rem;
-}
-
-.approach-card p {
-    margin-top: 12px;
-}
-
-/* ---------- PROJECTS ---------- */
-
-.projects {
-    padding: 90px 7%;
-    background: var(--mustard);
-
-    border-bottom: 4px solid var(--brown);
-}
-
-.projects h2 {
-    margin-top: 15px;
-    font-size: clamp(3rem, 6vw, 5.5rem);
-    line-height: 0.9;
-}
-
-.projects-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 35px;
-
-    margin-top: 55px;
-}
-
-.project {
-    min-height: 390px;
-
-    padding: 30px;
-
-    border: 5px solid var(--brown);
-    border-radius: 8px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    box-shadow: 8px 8px 0 var(--brown);
-}
-
-.project:nth-child(1) {
-    background: var(--olive);
-    color: var(--white);
-    transform: rotate(-1deg);
-}
-
-.project:nth-child(2) {
-    background: var(--blue);
-    transform: rotate(1.5deg);
-}
-
-.project-number {
-    font-size: 0.8rem;
-    font-weight: bold;
-    letter-spacing: 2px;
-}
-
-.project h3 {
-    margin-top: 25px;
-    font-size: 3rem;
-    line-height: 1;
-}
-
-.project p {
-    margin-top: 15px;
-}
-
-.project-link {
-    margin-top: 30px;
-    font-weight: bold;
-}
-
-/* ---------- STORY ---------- */
-
-.story {
-    padding: 100px 7%;
-
-    background: var(--olive);
-    color: var(--white);
-
-    border-bottom: 4px solid var(--brown);
-}
-
-.story-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-}
-
-.story h2 {
-    margin-top: 15px;
-    font-size: clamp(3rem, 6vw, 5.5rem);
-    line-height: 0.9;
-}
-
-.story-card {
-    padding: 40px;
-
-    background: var(--paper);
-    color: var(--brown);
-
-    border: 5px solid var(--brown);
-    border-radius: 8px;
-
-    box-shadow: 9px 9px 0 var(--brown);
-
-    transform: rotate(2deg);
-}
-
-.story-card p {
-    font-family: Georgia, serif;
-    font-size: 1.5rem;
-    line-height: 1.5;
-}
-
-.story-card span {
-    display: block;
-    margin-top: 25px;
-
-    font-family: Arial, sans-serif;
-    font-size: 0.85rem;
-    font-weight: bold;
-}
-
-/* ---------- VOLUNTEER ---------- */
-
-.volunteer {
-    padding: 90px 7%;
-
-    background: var(--blue);
-
-    border-bottom: 4px solid var(--brown);
-
-    text-align: center;
-}
-
-.volunteer h2 {
-    margin-top: 15px;
-
-    font-size: clamp(3rem, 6vw, 6rem);
-    line-height: 0.9;
-}
-
-.volunteer p {
-    max-width: 650px;
-    margin: 25px auto;
-
-    font-size: 1.1rem;
-}
-
-.volunteer .button {
-    background: var(--raspberry);
-    color: var(--white);
+.intro-text p {
+    font-size: 1.15rem;
+    line-height: 1.7;
 }
 
 /* ---------- FOOTER ---------- */
 
 footer {
+    position: relative;
+    z-index: 10;
+    margin-top: 100px;
     padding: 55px 7% 30px;
-
-    background: var(--cream);
-
-    border-top: 4px solid var(--brown);
+    background: #ffffff;
+    border-top: 3px solid var(--paper-border);
 }
 
 .footer-top {
@@ -710,13 +364,8 @@ footer {
 
 .footer-logo {
     font-family: Georgia, serif;
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: bold;
-}
-
-.footer-tagline {
-    margin-top: 10px;
-    max-width: 300px;
 }
 
 .footer-links {
@@ -726,139 +375,49 @@ footer {
 }
 
 .footer-bottom {
-    margin-top: 50px;
+    margin-top: 40px;
     padding-top: 20px;
-
-    border-top: 3px solid var(--brown);
-
+    border-top: 1px solid #e0e0e0;
     display: flex;
     justify-content: space-between;
-
-    font-size: 0.8rem;
+    font-size: 0.85rem;
+    color: #666;
 }
 
-/* ---------- MOBILE ---------- */
+/* ---------- RESPONSIVE ---------- */
 
 @media (max-width: 850px) {
-
-    nav {
-        padding: 15px 5%;
-    }
-
-    .nav-links {
-        display: none;
-    }
-
     .hero {
         grid-template-columns: 1fr;
-        padding-top: 55px;
-    }
-
-    .hero-art {
-        min-height: 500px;
-    }
-
-    .intro-grid,
-    .story-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .approach-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .projects-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .map-area {
-        min-height: 620px;
-    }
-
-    .india-map {
-        width: 260px;
-        height: 420px;
-    }
-
-    .marker {
-        font-size: 0.7rem;
-        padding: 7px 9px;
-    }
-
-    .marker-1 {
-        left: 3%;
-    }
-
-    .marker-2 {
-        right: 3%;
-    }
-
-    .marker-3 {
-        left: 2%;
-    }
-
-    .marker-4 {
-        right: 3%;
-    }
-
-    .marker-5 {
-        left: 8%;
-    }
-
-    .footer-top {
-        flex-direction: column;
-    }
-
-    .footer-links {
-        flex-wrap: wrap;
-    }
-
-}
-
-@media (max-width: 500px) {
-
-    .hero h1 {
-        font-size: 4rem;
-        letter-spacing: -3px;
-    }
-
-    .hero-art {
-        transform: scale(0.85);
-        transform-origin: top left;
-        min-height: 450px;
-    }
-
-    .hero-buttons {
-        flex-direction: column;
-    }
-
-    .button {
         text-align: center;
     }
 
-    .map-area {
-        min-height: 600px;
+    .hero-description {
+        margin: 20px auto 0;
     }
 
-    .india-map {
-        width: 210px;
-        height: 360px;
+    .hero-buttons {
+        justify-content: center;
     }
 
+    .intro-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .comic-bubble {
+        width: 100%;
+        max-width: 320px;
+        transform: none !important;
+    }
 }
-
 </style>
 </head>
 
-
 <body>
 
-<!-- ================= NAVIGATION ================= -->
-
+<!-- NAVBAR -->
 <nav>
-
     <a href="#home" class="logo">रूhī</a>
-
     <div class="nav-links">
         <a href="#home">Home</a>
         <a href="#about">About</a>
@@ -867,521 +426,91 @@ footer {
         <a href="#volunteer">Volunteer</a>
         <a href="#contact">Contact</a>
     </div>
-
 </nav>
 
+<div class="sky-container">
 
-<!-- ================= HERO ================= -->
+    <!-- FLOATING CLOUDS -->
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+    <div class="cloud cloud-3"></div>
 
-<section class="hero" id="home">
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
 
-    <div class="hero-copy">
-
-        <span class="eyebrow">A YOUTH-LED INITIATIVE</span>
-
-        <h1>
-            Hey,<br>
-            <span>come in.</span>
-        </h1>
-
-        <p class="hero-description">
-            रूhī is a youth-led organisation working towards a world
-            where every child has the space to learn, explore,
-            make mistakes and dream a little bigger.
-        </p>
-
-        <div class="hero-buttons">
-            <a href="#about" class="button button-primary">
-                Our story →
-            </a>
-
-            <a href="#volunteer" class="button button-secondary">
-                Get involved ✦
-            </a>
-        </div>
-
-    </div>
-
-
-    <!-- PLAYFUL HERO COLLAGE -->
-
-    <div class="hero-art">
-
-        <div class="paper paper-one">
-            <h3>learn.</h3>
-            <p>
-                Because curiosity deserves somewhere to go.
+        <div class="hero-copy">
+            <span class="eyebrow">A YOUTH-LED INITIATIVE</span>
+            <h1>
+                Hey,<br>
+                <span>come in.</span>
+            </h1>
+            <p class="hero-description">
+                रूhī is a youth-led organisation working towards a world where every child has the space to learn, explore, make mistakes and dream a little bigger.
             </p>
+            <div class="hero-buttons">
+                <a href="#about" class="button button-primary">Our story →</a>
+                <a href="#volunteer" class="button button-secondary">Get involved ✦</a>
+            </div>
         </div>
 
-        <div class="paper paper-two">
-            <h3>grow.</h3>
-            <p>
-                Through experiences, people, stories and play.
-            </p>
-        </div>
+        <!-- PLAYFUL COMIC SPEECH BUBBLES -->
+        <div class="hero-art">
 
-        <div class="paper paper-three">
-            <h3>dream.</h3>
-            <p>
-                And believe those dreams are possible.
-            </p>
-        </div>
+            <div class="comic-bubble bubble-one">
+                <h3>learn.</h3>
+                <p>Because curiosity deserves somewhere to go.</p>
+            </div>
 
-        <div class="doodle star">✦</div>
-        <div class="doodle flower">✿</div>
-        <div class="doodle arrow">↝</div>
+            <div class="comic-bubble bubble-two">
+                <h3>grow.</h3>
+                <p>Through experiences, people, stories and play.</p>
+            </div>
 
-    </div>
-
-</section>
-
-
-<!-- ETHNIC PATTERN -->
-
-<div class="pattern"></div>
-
-
-<!-- ================= INTRO ================= -->
-
-<section class="intro" id="about">
-
-    <div class="intro-grid">
-
-        <div>
-            <div class="section-label">01 / ABOUT रूhī</div>
-
-            <h2>
-                Childhood should have room for curiosity.
-            </h2>
-        </div>
-
-        <div class="intro-text">
-
-            <p>
-                We believe education is more than what happens
-                inside a classroom.
-            </p>
-
-            <br>
-
-            <p>
-                It is having someone answer your questions.
-                It is discovering something new.
-                It is knowing about the world around you.
-                It is having the confidence to say,
-                <span class="highlight">"I want to try."</span>
-            </p>
-
-            <br>
-
-            <p>
-                रूhī works with children and communities to create
-                opportunities for learning, social awareness and
-                expression.
-            </p>
+            <div class="comic-bubble bubble-three">
+                <h3>dream.</h3>
+                <p>And believe those dreams are possible.</p>
+            </div>
 
         </div>
 
-    </div>
-
-</section>
-
-
-<!-- ================= WORLD ================= -->
-
-<section class="world" id="world">
-
-    <div class="world-header">
-
-        <div class="section-label">
-            02 / THE WORLD WE SEE
-        </div>
-
-        <h2>
-            India is many stories.
-        </h2>
-
-        <p>
-            Where a child grows can shape what opportunities,
-            information and support reach them.
-            We want to understand those differences —
-            and work with communities rather than simply
-            speaking for them.
-        </p>
-
-    </div>
-
-
-    <div class="map-area">
-
-        <div class="map-title">
-            INDIA, ONE MAP — MANY EXPERIENCES
-        </div>
-
-
-        <!-- Simplified original India illustration -->
-
-        <svg class="india-map"
-             viewBox="0 0 300 470"
-             xmlns="http://www.w3.org/2000/svg">
-
-            <path d="
-            M76 18
-            C93 24 113 32 129 45
-            C145 52 157 64 169 76
-            C185 83 204 88 218 99
-            C226 109 219 121 208 128
-            C214 139 230 149 224 161
-            C220 171 207 174 211 187
-            C216 202 207 212 197 220
-            C188 230 190 246 182 257
-            C173 271 165 287 159 305
-            C153 324 148 344 139 365
-            C132 383 126 402 118 422
-            C111 438 106 451 99 461
-            C91 448 84 432 78 416
-            C71 398 62 383 53 370
-            C43 355 31 345 27 330
-            C23 316 31 302 39 291
-            C45 280 42 266 32 256
-            C22 245 14 234 17 220
-            C19 207 29 198 40 192
-            C49 186 47 174 38 165
-            C27 155 20 144 24 131
-            C28 119 40 114 49 108
-            C58 102 56 91 48 82
-            C40 73 39 62 48 54
-            C56 47 67 46 72 37
-            C76 30 72 24 76 18
-            Z
-            " />
-
-        </svg>
-
-
-        <!-- LOCATION CARDS -->
-
-        <div class="marker marker-1">
-            Learning access
-        </div>
-
-        <div class="marker marker-2">
-            Community spaces
-        </div>
-
-        <div class="marker marker-3">
-            Social awareness
-        </div>
-
-        <div class="marker marker-4">
-            Creative learning
-        </div>
-
-        <div class="marker marker-5">
-            Digital access
-        </div>
-
-
-        <div class="map-note">
-            *These are focus themes for illustration, not
-            statistics about individual cities. We will add
-            verified local data as रूhī's work grows.
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- PATTERN -->
-
-<div class="pattern"></div>
-
-
-<!-- ================= APPROACH ================= -->
-
-<section class="approach">
-
-    <div class="section-label">
-        03 / OUR APPROACH
-    </div>
-
-    <h2>
-        Start small.<br>
-        Listen first.
-    </h2>
-
-
-    <div class="approach-grid">
-
-        <div class="approach-card">
-
-            <div class="icon">📚</div>
-
-            <h3>Learn</h3>
-
-            <p>
-                Creating opportunities for children to
-                discover, ask questions and build basic
-                knowledge.
-            </p>
-
-        </div>
-
-
-        <div class="approach-card">
-
-            <div class="icon">✦</div>
-
-            <h3>Create</h3>
-
-            <p>
-                Using art, conversations, activities and
-                experiences to make learning feel alive.
-            </p>
-
-        </div>
-
-
-        <div class="approach-card">
-
-            <div class="icon">🤝</div>
-
-            <h3>Connect</h3>
-
-            <p>
-                Working with young people, communities
-                and volunteers to turn ideas into action.
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= PROJECTS ================= -->
-
-<section class="projects" id="projects">
-
-    <div class="section-label">
-        04 / WHAT WE'VE DONE
-    </div>
-
-    <h2>
-        From ideas<br>
-        to action.
-    </h2>
-
-
-    <div class="projects-grid">
-
-        <article class="project">
-
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="content-section intro" id="about">
+        <div class="intro-grid">
             <div>
-                <div class="project-number">
-                    PROJECT 01
-                </div>
-
-                <h3>
-                    Our first project.
-                </h3>
-
+                <div class="section-label">01 / ABOUT रूhī</div>
+                <h2>Childhood should have room for curiosity.</h2>
+            </div>
+            <div class="intro-text">
                 <p>
-                    A short description of the project will
-                    go here — what happened, who participated
-                    and what we learnt.
+                    We believe education is more than what happens inside a classroom. It is having someone answer your questions, discovering something new, and having the confidence to say, <strong>"I want to try."</strong>
                 </p>
             </div>
-
-            <div class="project-link">
-                VIEW PROJECT →
-            </div>
-
-        </article>
-
-
-        <article class="project">
-
-            <div>
-                <div class="project-number">
-                    PROJECT 02
-                </div>
-
-                <h3>
-                    More to come.
-                </h3>
-
-                <p>
-                    This space will grow with every project
-                    रूhī takes into the community.
-                </p>
-            </div>
-
-            <div class="project-link">
-                VIEW PROJECT →
-            </div>
-
-        </article>
-
-    </div>
-
-</section>
-
-
-<!-- ================= STORY ================= -->
-
-<section class="story">
-
-    <div class="story-grid">
-
-        <div>
-
-            <div class="section-label">
-                05 / OUR STORY
-            </div>
-
-            <h2>
-                Why रूhī exists.
-            </h2>
-
         </div>
+    </section>
 
+</div>
 
-        <div class="story-card">
-
-            <p>
-                "We started with a simple thought:
-                every child deserves the chance to look
-                at the world and wonder what could be."
-            </p>
-
-            <span>
-                — THE FOUNDERS OF रूhī
-            </span>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- PATTERN -->
-
-<div class="pattern"></div>
-
-
-<!-- ================= BLOG PREVIEW ================= -->
-
-<section class="intro" id="blog">
-
-    <div class="intro-grid">
-
-        <div>
-            <div class="section-label">
-                06 / FROM रूhī
-            </div>
-
-            <h2>
-                Stories, thoughts & things we're learning.
-            </h2>
-        </div>
-
-        <div class="intro-text">
-
-            <p>
-                Our blog will be a place for monthly updates,
-                reflections from our projects and conversations
-                around childhood, learning and community.
-            </p>
-
-            <br>
-
-            <p>
-                <strong>First post coming soon ✦</strong>
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= VOLUNTEER ================= -->
-
-<section class="volunteer" id="volunteer">
-
-    <div class="section-label">
-        07 / GET INVOLVED
-    </div>
-
-    <h2>
-        Want to be<br>
-        part of this?
-    </h2>
-
-    <p>
-        Whether you want to volunteer, collaborate,
-        support a project or simply learn more —
-        we'd love to hear from you.
-    </p>
-
-    <a href="#contact" class="button">
-        Let's talk →
-    </a>
-
-</section>
-
-
-<!-- ================= FOOTER ================= -->
-
+<!-- FOOTER -->
 <footer id="contact">
-
     <div class="footer-top">
-
         <div>
-
-            <div class="footer-logo">
-                रूhī
-            </div>
-
-            <p class="footer-tagline">
-                Giving every child a chance to dream.
-            </p>
-
+            <div class="footer-logo">रूhī</div>
+            <p style="margin-top: 8px; color: #666;">Giving every child a chance to dream.</p>
         </div>
-
-
         <div class="footer-links">
-
             <a href="#about">About</a>
             <a href="#blog">Blog</a>
             <a href="#projects">Gallery</a>
             <a href="#volunteer">Volunteer</a>
-
         </div>
-
     </div>
-
-
     <div class="footer-bottom">
-
-        <span>
-            © 2026 रूhī
-        </span>
-
-        <span>
-            Made with curiosity ✦
-        </span>
-
+        <span>© 2026 रूhī</span>
+        <span>Made with curiosity ✦</span>
     </div>
-
 </footer>
-
 
 </body>
 </html>
