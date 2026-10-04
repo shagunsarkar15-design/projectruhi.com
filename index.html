@@ -7,22 +7,21 @@
 
 <style>
 /* =========================================================
-   RUHĪ — SKY & PAPER COMIC THEME
-   Soft Sky Gradient • Scattered Clouds • Paper Bubble Cards
+   RUHĪ — SUNSET & SPIRAL SUN THEME
+   Warm Pink/Orange Gradient • Spiral Sun • Playful Bubbles
    ========================================================= */
 
 :root {
-    --sky-top: #a1c4fd;
-    --sky-bottom: #c2e9fb;
-    --cloud-white: #ffffff;
-    --paper-bg: #fbf9f4;
-    --paper-border: #2b2b2b;
-    --text-dark: #23201e;
-    --accent-orange: #e9693f;
-    --accent-raspberry: #c93667;
-    --accent-mustard: #e5b83c;
-    --accent-blue: #5b9ed6;
-    --accent-lime: #8cb83e;
+    --sunset-pink: #ff758c;
+    --sunset-orange: #ff7eb3;
+    --sunset-warm: #ffb199;
+    --sunset-yellow: #ffdd67;
+    --paper-white: #fffdf9;
+    --text-dark: #2a1e24;
+    --border-dark: #23191e;
+    --accent-raspberry: #d83363;
+    --accent-yellow: #f1b82d;
+    --accent-coral: #f26247;
 }
 
 * {
@@ -36,11 +35,12 @@ html {
 }
 
 body {
-    background: linear-gradient(180deg, #b0d4f6 0%, #e8f4fc 50%, #f7fbfe 100%);
+    background: linear-gradient(175deg, #ff758c 0%, #ff8e53 38%, #ffc371 70%, #ffeec3 100%);
     color: var(--text-dark);
-    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    font-family: 'Fredoka', 'Segoe UI', -apple-system, sans-serif;
     line-height: 1.6;
     overflow-x: hidden;
+    min-height: 100vh;
 }
 
 h1, h2, h3 {
@@ -62,95 +62,102 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 18px 5%;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(10px);
-    border-bottom: 2px solid rgba(43, 43, 43, 0.15);
+    padding: 18px 6%;
+    background: rgba(255, 245, 235, 0.7);
+    backdrop-filter: blur(12px);
+    border-bottom: 3px solid var(--border-dark);
 }
 
 .logo {
     font-family: Georgia, serif;
-    font-size: 2.2rem;
+    font-size: 2.3rem;
     font-weight: bold;
     color: var(--text-dark);
 }
 
 .nav-links {
     display: flex;
-    gap: 30px;
+    gap: 28px;
     font-size: 0.95rem;
-    font-weight: 600;
-}
-
-.nav-links a {
-    position: relative;
-    transition: color 0.2s ease;
+    font-weight: 700;
 }
 
 .nav-links a:hover {
     color: var(--accent-raspberry);
 }
 
-/* ---------- FLOATING BACKGROUND CLOUDS ---------- */
+/* ---------- HERO CONTAINER & SUNSET BACKGROUND ART ---------- */
 
-.sky-container {
+.hero-wrapper {
     position: relative;
     width: 100%;
-    min-height: 100vh;
+    min-height: calc(100vh - 80px);
+    padding: 60px 7%;
+    display: flex;
+    align-items: center;
     overflow: hidden;
 }
 
-.cloud {
+/* SPIRAL SUN BACKGROUND */
+.spiral-sun {
     position: absolute;
-    background: #ffffff;
-    border-radius: 100px;
-    opacity: 0.85;
-    box-shadow: 0 8px 24px rgba(149, 184, 219, 0.25);
+    top: 50%;
+    right: -100px;
+    transform: translateY(-50%);
+    width: 620px;
+    height: 620px;
+    opacity: 0.35;
     pointer-events: none;
+    z-index: 1;
+    animation: rotateSun 80s linear infinite;
 }
 
-.cloud::before, .cloud::after {
+@keyframes rotateSun {
+    from { transform: translateY(-50%) rotate(0deg); }
+    to { transform: translateY(-50%) rotate(360deg); }
+}
+
+/* FLOATING SUNSET CLOUDS */
+.sunset-cloud {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(4px);
+    border-radius: 100px;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.sunset-cloud::before, .sunset-cloud::after {
     content: '';
     position: absolute;
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.45);
     border-radius: 50%;
 }
 
-.cloud-1 {
+.cloud-a {
+    width: 220px;
+    height: 65px;
+    top: 8%;
+    left: 8%;
+}
+.cloud-a::before { width: 90px; height: 90px; top: -40px; left: 30px; }
+.cloud-a::after { width: 70px; height: 70px; top: -25px; right: 30px; }
+
+.cloud-b {
     width: 180px;
-    height: 60px;
-    top: 10%;
-    left: 5%;
+    height: 55px;
+    bottom: 12%;
+    left: 42%;
 }
-.cloud-1::before { width: 80px; height: 80px; top: -35px; left: 25px; }
-.cloud-1::after { width: 60px; height: 60px; top: -20px; right: 25px; }
+.cloud-b::before { width: 75px; height: 75px; top: -30px; left: 25px; }
+.cloud-b::after { width: 60px; height: 60px; top: -20px; right: 25px; }
 
-.cloud-2 {
-    width: 240px;
-    height: 75px;
-    top: 18%;
-    right: 8%;
-}
-.cloud-2::before { width: 100px; height: 100px; top: -45px; left: 35px; }
-.cloud-2::after { width: 80px; height: 80px; top: -25px; right: 35px; }
-
-.cloud-3 {
-    width: 150px;
-    height: 50px;
-    top: 60%;
-    left: 45%;
-    opacity: 0.6;
-}
-.cloud-3::before { width: 65px; height: 65px; top: -25px; left: 20px; }
-.cloud-3::after { width: 50px; height: 50px; top: -15px; right: 20px; }
-
-/* ---------- HERO SECTION ---------- */
+/* ---------- HERO LAYOUT ---------- */
 
 .hero {
     position: relative;
     z-index: 10;
-    min-height: calc(100vh - 80px);
-    padding: 60px 7%;
+    width: 100%;
     display: grid;
     grid-template-columns: 1.05fr 0.95fr;
     gap: 50px;
@@ -159,16 +166,16 @@ nav {
 
 .eyebrow {
     display: inline-block;
-    padding: 8px 16px;
-    background: var(--accent-raspberry);
-    color: #ffffff;
-    border: 2px solid var(--paper-border);
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 700;
+    padding: 8px 18px;
+    background: var(--accent-yellow);
+    color: var(--border-dark);
+    border: 3px solid var(--border-dark);
+    border-radius: 25px;
+    font-size: 0.82rem;
+    font-weight: 800;
     letter-spacing: 1px;
-    transform: rotate(-2deg);
-    box-shadow: 2px 2px 0 var(--paper-border);
+    transform: rotate(-3deg);
+    box-shadow: 3px 3px 0px var(--border-dark);
 }
 
 .hero h1 {
@@ -180,7 +187,8 @@ nav {
 }
 
 .hero h1 span {
-    color: var(--accent-orange);
+    color: var(--paper-white);
+    text-shadow: 3px 3px 0px var(--border-dark);
 }
 
 .hero-description {
@@ -188,7 +196,8 @@ nav {
     margin-top: 25px;
     font-size: 1.2rem;
     line-height: 1.7;
-    color: #3d3935;
+    color: #2e1d24;
+    font-weight: 500;
 }
 
 .hero-buttons {
@@ -200,54 +209,54 @@ nav {
 .button {
     display: inline-block;
     padding: 14px 28px;
-    border: 3px solid var(--paper-border);
+    border: 3px solid var(--border-dark);
     border-radius: 30px;
-    font-weight: bold;
+    font-weight: 800;
     font-size: 1rem;
-    box-shadow: 4px 4px 0 var(--paper-border);
-    transition: all 0.2s ease;
+    box-shadow: 5px 5px 0px var(--border-dark);
+    transition: all 0.15s ease;
 }
 
 .button:hover {
     transform: translate(2px, 2px);
-    box-shadow: 2px 2px 0 var(--paper-border);
+    box-shadow: 2px 2px 0px var(--border-dark);
 }
 
 .button-primary {
-    background: var(--accent-orange);
-    color: #fff;
+    background: var(--accent-coral);
+    color: #ffffff;
 }
 
 .button-secondary {
-    background: #ffffff;
-    color: var(--text-dark);
+    background: var(--paper-white);
+    color: var(--border-dark);
 }
 
-/* ---------- HERO ART: COMIC PAPER SPEECH BUBBLES ---------- */
+/* ---------- COMIC SPEECH BUBBLES ---------- */
 
 .hero-art {
     position: relative;
-    min-height: 520px;
+    min-height: 500px;
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 24px;
     justify-content: center;
     align-items: center;
 }
 
 .comic-bubble {
     position: relative;
-    background: var(--paper-bg);
-    border: 3px solid var(--paper-border);
-    border-radius: 50px / 40px; /* Gives the classic oval comic shape */
-    padding: 28px 38px;
+    background: var(--paper-white);
+    border: 3px solid var(--border-dark);
+    border-radius: 60px / 45px;
+    padding: 26px 36px;
     width: 320px;
-    box-shadow: 6px 6px 0px rgba(43, 43, 43, 0.85);
-    transition: transform 0.3s ease;
+    box-shadow: 7px 7px 0px var(--border-dark);
+    transition: transform 0.25s ease;
 }
 
 .comic-bubble:hover {
-    transform: scale(1.03) rotate(0deg) !important;
+    transform: scale(1.04) rotate(0deg) !important;
 }
 
 /* Speech Bubble Tail */
@@ -255,12 +264,12 @@ nav {
     content: '';
     position: absolute;
     bottom: -15px;
-    left: 40px;
+    left: 45px;
     width: 0;
     height: 0;
     border-style: solid;
-    border-width: 18px 15px 0 5px;
-    border-color: var(--paper-bg) transparent transparent transparent;
+    border-width: 18px 14px 0 4px;
+    border-color: var(--paper-white) transparent transparent transparent;
     z-index: 2;
 }
 
@@ -268,59 +277,50 @@ nav {
     content: '';
     position: absolute;
     bottom: -19px;
-    left: 38px;
+    left: 43px;
     width: 0;
     height: 0;
     border-style: solid;
-    border-width: 20px 17px 0 4px;
-    border-color: var(--paper-border) transparent transparent transparent;
+    border-width: 20px 16px 0 3px;
+    border-color: var(--border-dark) transparent transparent transparent;
     z-index: 1;
 }
 
-.bubble-one {
-    transform: rotate(-3deg) translateX(-20px);
-}
-
-.bubble-two {
-    transform: rotate(3deg) translateX(25px);
-}
-
-.bubble-three {
-    transform: rotate(-2deg) translateX(-10px);
-}
+.bubble-one { transform: rotate(-4deg) translateX(-20px); }
+.bubble-two { transform: rotate(4deg) translateX(25px); }
+.bubble-three { transform: rotate(-2deg) translateX(-10px); }
 
 .comic-bubble h3 {
     font-size: 2rem;
-    color: var(--text-dark);
-    margin-bottom: 6px;
+    margin-bottom: 4px;
 }
 
 .bubble-one h3 { color: var(--accent-raspberry); }
-.bubble-two h3 { color: var(--accent-blue); }
-.bubble-three h3 { color: var(--accent-orange); }
+.bubble-two h3 { color: var(--accent-coral); }
+.bubble-three h3 { color: #d88000; }
 
 .comic-bubble p {
     font-size: 0.98rem;
-    color: #4a4540;
+    color: #43333b;
     line-height: 1.4;
 }
 
-/* ---------- CONTENT SECTIONS (CLEAN & MODERN) ---------- */
+/* ---------- CONTENT CONTAINER ---------- */
 
 section.content-section {
     position: relative;
     z-index: 10;
     max-width: 1100px;
-    margin: 60px auto;
+    margin: 40px auto 80px;
     padding: 60px 40px;
-    background: rgba(255, 255, 255, 0.9);
-    border: 3px solid var(--paper-border);
-    border-radius: 24px;
-    box-shadow: 8px 8px 0px rgba(43, 43, 43, 0.15);
+    background: rgba(255, 253, 249, 0.92);
+    border: 3px solid var(--border-dark);
+    border-radius: 28px;
+    box-shadow: 10px 10px 0px rgba(35, 25, 30, 0.2);
 }
 
 .section-label {
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: 2px;
     font-size: 0.8rem;
     text-transform: uppercase;
@@ -350,10 +350,9 @@ section.content-section {
 footer {
     position: relative;
     z-index: 10;
-    margin-top: 100px;
     padding: 55px 7% 30px;
-    background: #ffffff;
-    border-top: 3px solid var(--paper-border);
+    background: var(--paper-white);
+    border-top: 3px solid var(--border-dark);
 }
 
 .footer-top {
@@ -377,7 +376,7 @@ footer {
 .footer-bottom {
     margin-top: 40px;
     padding-top: 20px;
-    border-top: 1px solid #e0e0e0;
+    border-top: 2px solid #eee;
     display: flex;
     justify-content: space-between;
     font-size: 0.85rem;
@@ -404,6 +403,13 @@ footer {
         grid-template-columns: 1fr;
     }
 
+    .spiral-sun {
+        right: 50%;
+        transform: translate(50%, -50%);
+        width: 450px;
+        height: 450px;
+    }
+
     .comic-bubble {
         width: 100%;
         max-width: 320px;
@@ -415,7 +421,7 @@ footer {
 
 <body>
 
-<!-- NAVBAR -->
+<!-- NAVIGATION -->
 <nav>
     <a href="#home" class="logo">रूhī</a>
     <div class="nav-links">
@@ -428,14 +434,21 @@ footer {
     </div>
 </nav>
 
-<div class="sky-container">
+<div class="hero-wrapper">
 
-    <!-- FLOATING CLOUDS -->
-    <div class="cloud cloud-1"></div>
-    <div class="cloud cloud-2"></div>
-    <div class="cloud cloud-3"></div>
+    <!-- SPIRAL SUN SVG -->
+    <svg class="spiral-sun" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#FFFFFF" d="M100,0 C105,30 120,40 150,50 C120,60 105,70 100,100 C95,70 80,60 50,50 C80,40 95,30 100,0 Z" />
+        <path fill="#FFFFFF" d="M170,30 C150,50 140,70 150,100 C130,90 110,100 100,130 C110,100 120,80 100,70 C130,70 150,50 170,30 Z" opacity="0.6" />
+        <circle cx="100" cy="100" r="75" stroke="#FFFFFF" stroke-width="4" fill="none" stroke-dasharray="6,8" />
+        <circle cx="100" cy="100" r="50" fill="#FFFFFF" opacity="0.4" />
+    </svg>
 
-    <!-- HERO SECTION -->
+    <!-- SUNSET CLOUDS -->
+    <div class="sunset-cloud cloud-a"></div>
+    <div class="sunset-cloud cloud-b"></div>
+
+    <!-- HERO CONTENT -->
     <section class="hero" id="home">
 
         <div class="hero-copy">
@@ -453,7 +466,7 @@ footer {
             </div>
         </div>
 
-        <!-- PLAYFUL COMIC SPEECH BUBBLES -->
+        <!-- COMIC SPEECH BUBBLES -->
         <div class="hero-art">
 
             <div class="comic-bubble bubble-one">
@@ -475,22 +488,22 @@ footer {
 
     </section>
 
-    <!-- ABOUT SECTION -->
-    <section class="content-section intro" id="about">
-        <div class="intro-grid">
-            <div>
-                <div class="section-label">01 / ABOUT रूhī</div>
-                <h2>Childhood should have room for curiosity.</h2>
-            </div>
-            <div class="intro-text">
-                <p>
-                    We believe education is more than what happens inside a classroom. It is having someone answer your questions, discovering something new, and having the confidence to say, <strong>"I want to try."</strong>
-                </p>
-            </div>
-        </div>
-    </section>
-
 </div>
+
+<!-- ABOUT SECTION -->
+<section class="content-section intro" id="about">
+    <div class="intro-grid">
+        <div>
+            <div class="section-label">01 / ABOUT रूhī</div>
+            <h2>Childhood should have room for curiosity.</h2>
+        </div>
+        <div class="intro-text">
+            <p>
+                We believe education is more than what happens inside a classroom. It is having someone answer your questions, discovering something new, and having the confidence to say, <strong>"I want to try."</strong>
+            </p>
+        </div>
+    </div>
+</section>
 
 <!-- FOOTER -->
 <footer id="contact">
